@@ -1,22 +1,22 @@
 mod string_functions;
 mod datetime_functions;
+mod math_functions;
 
 
 use string_functions::*;
 use datetime_functions::*;
+use math_functions::*;
 
 
 fn main() {
-    println!("Hello, world!");
 
-    let reverse_hello: String = reverse("Hello, world!");
 
-    println!("Reverse: {}", reverse_hello);
+    let booler = is_armstrong_number(4_106_098_957);
 
-    let modtry = 10000 % 46;
-    let divtry = 10000 / 46;
+    // 9474
+    //4_106_098_957
 
-    println!("modtry: {}, divtry: {}", modtry, divtry);
+    println!("booler: {}", booler);
 
 
 }
