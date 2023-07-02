@@ -2,6 +2,8 @@
 
 use std::num::*;
 
+use crate::print_type_of;
+
 pub fn is_armstrong_number(num: u32) -> bool {
 
     // converts number to string, string to chars, then
@@ -11,30 +13,24 @@ pub fn is_armstrong_number(num: u32) -> bool {
         .chars()
         .map(|c| c.to_digit(10).unwrap())
         .collect();
-
-    println!("vectored_number: {:?}", vectored_number);
-
-
     let mut potential_armstrong_number = 0;
+    // Loops through vectored_number
     for digit in vectored_number.iter() {
-        println!("digit: {}", *digit);
-        println!("overflow test: {:?}", num::checked_pow(*digit, vectored_number.len()).unwrap() );
-        println!("length of vector: {}", vectored_number.len());
-        //if u32::overflowing_pow(*digit, vectored_number.len().try_into().unwrap()).1 {
+        // Checks to see if digit^vectored_number[i] overflows or not
         if num::checked_pow(*digit, vectored_number.len()).is_some() {
-            //potential_armstrong_number += u32::overflowing_pow(*digit, vectored_number.len().try_into().unwrap()).0;
-            potential_armstrong_number += num::checked_pow(*digit, vectored_number.len()).unwrap();
-            // issue is that we get an overflow error when we add, not in the power calculation itself
+            let added_value = num::checked_pow(*digit, vectored_number.len()).unwrap();
+            // If add_result is some u32, add your old guess for armstrong numbers to your current added_value. Otherwise, there's an overflow,
+            //   so return an error statement
+            let add_result = add_numbers(Some(potential_armstrong_number), Some(added_value));
+            match add_result {
+                Some(_sum) => potential_armstrong_number += added_value,
+                None => println!("Can't add the two numbers"),
+            }
         } else {
-            // the power is None
-            // what to do here?
             potential_armstrong_number += 0;
         }
         
     }
-
-    println!("Original number: {}", num);
-    println!("the potential_armstrong_number: {}", potential_armstrong_number);
 
     if potential_armstrong_number == num.try_into().unwrap() {
         return true
@@ -43,4 +39,12 @@ pub fn is_armstrong_number(num: u32) -> bool {
     }
 
     
+}
+
+// Adds two numbers together by sending in those numbers as Options, adding them together, and checking for overflow along with them being Some number
+pub fn add_numbers(a: Option<u32>, b: Option<u32>) -> Option<u32> {
+    match (a, b) {
+        (Some(num1), Some(num2)) => num1.checked_add(num2),
+        _ => None,
+    }
 }
