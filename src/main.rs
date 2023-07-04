@@ -10,23 +10,24 @@ use math_functions::*;
 
 fn main() {
 
+    let chess_square: u32 = 64;
 
-    let techer: u32 = 3548299154;
-    let becher = 1073741824;
+    let output = square(chess_square);
 
+    let grain_total = total();
 
-    let techerbecher = math_functions::add_numbers(Some(techer), Some(becher));
-    match techerbecher {
-        Some(sum) => println!("Sum: {}", sum),
-        None => println!("One or both of the numbers are missing."),
-    }
+    println!("grains on chess_square {}: {}", chess_square, output);
+    println!("The total is: {}", grain_total);
 
-    let booler = is_armstrong_number(4_106_098_957);
+    let my_num = grain_total as f64 / 18446744073709551615.0;
 
-    // 9474
-    //4_106_098_957
+    // 9223372036854775807
 
-    println!("booler: {}", booler);
+    // should be 18446744073709551615
+
+    // target result is bigger by factor of 2 -- meaning that i am missing one instance of doubling
+
+    println!("my_num: {}", my_num);
 
 
 }

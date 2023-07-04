@@ -1,6 +1,6 @@
 // math_functions / mod.rs
 
-use std::num::*;
+use std::{num::*, cell};
 
 use crate::print_type_of;
 
@@ -48,3 +48,63 @@ pub fn add_numbers(a: Option<u32>, b: Option<u32>) -> Option<u32> {
         _ => None,
     }
 }
+
+
+// -- Squares of Series Functions -- //
+
+pub fn square_of_sum(n: u32) -> u32 {
+    // Using formula for the square of the sum of natural numbers
+    // Sum of natural numbers -- sum of n from 1 to n is ( n * (n + 1) ) / 2
+    let sum = ( n * (n + 1) ) / 2;
+    sum * sum
+}
+
+pub fn sum_of_squares(n: u32) -> u32 {
+    // Using formula for the sum of squares -- sum of n^2 from 1 to n is n * (n + 1) * (2n + 1) / 6
+    n * (n + 1) * (2 * n + 1) / 6
+}
+
+pub fn difference(n: u32) -> u32 {
+    square_of_sum(n) - sum_of_squares(n)
+}
+
+// -- Squares of Series Functions -- //
+
+
+
+
+
+// -- Chess Square Functions -- //
+
+pub fn square(s: u32) -> u64 {
+    
+    let mut grain_amount = 1;    
+    if is_chess_square(&s) {
+        for _ in 0..s-1 {
+            grain_amount *= 2;
+        }
+    }
+    grain_amount
+}
+
+pub fn total() -> u64 {
+    let mut total_grain = 0;
+    for cell_number in 1..65 {
+        total_grain += square(cell_number);
+        println!("cell number:{}", cell_number);
+    }
+    total_grain
+}
+
+// Issue, I should try to have this return an option?
+//  Problem might require a panic message specifically...
+pub fn is_chess_square(square: &u32) -> bool {
+    if *square < 1 || *square > 64 {
+        panic!("Square must be between 1 and 64");
+    }
+    true
+}
+
+// -- Chess Square Functions -- //
+
+

@@ -11,5 +11,18 @@ num -- https://crates.io/crates/num
 -- Rust Docs -- 
 
 PrimitiveDateTime -- https://docs.rs/time/latest/time/struct.PrimitiveDateTime.html#method.new
+std::iter::Map -- https://doc.rust-lang.org/std/iter/struct.Map.html
+num::checked_pow -- https://docs.rs/num/latest/num/fn.checked_pow.html
+std::option::Option -- https://doc.rust-lang.org/std/option/enum.Option.html#variant.Some
 
 -- Rust Docs -- 
+
+
+
+
+-- Number Notes -- 
+
+Splitting integer into individual digits -- https://stackoverflow.com/questions/41536479/how-do-i-split-an-integer-into-individual-digits
+Sum of the squares of the first n numbers -- https://www.youtube.com/watch?v=aI0M4XRiz4I&ab_channel=MathsSmart
+
+-- Number Notes -- 
