@@ -1,34 +1,39 @@
 mod string_functions;
 mod datetime_functions;
 mod math_functions;
+mod general_functions;
 
 
 use string_functions::*;
 use datetime_functions::*;
 use math_functions::*;
+use general_functions::*;
 
 
 fn main() {
 
-    let chess_square: u32 = 64;
+    let word = "Orchestra";
+    let inputs = ["cashregister", "Carthorse", "radishes", "orchestra"];
+    let outputs = vec!["Carthorse"];
 
-    let output = square(chess_square);
+    let junk = anagrams_for(word, &inputs);
 
-    let grain_total = total();
+    println!("junk: {:?}", junk);
 
-    println!("grains on chess_square {}: {}", chess_square, output);
-    println!("The total is: {}", grain_total);
+    let mut v = [-5, 4, 1, -3, 2];
 
-    let my_num = grain_total as f64 / 18446744073709551615.0;
+    v.sort_unstable();
+    assert!(v == [-5, -3, 1, 2, 4]);
 
-    // 9223372036854775807
+    println!("v sorted: {:?}", v);
 
-    // should be 18446744073709551615
 
-    // target result is bigger by factor of 2 -- meaning that i am missing one instance of doubling
 
-    println!("my_num: {}", my_num);
-
+    let mut word_vec: Vec<_> = word.chars().collect();
+    word_vec.sort_unstable();
+    for letter in word_vec {
+        println!("letter: {}", letter);
+    }
 
 }
 
