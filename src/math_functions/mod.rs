@@ -50,6 +50,20 @@ pub fn add_numbers(a: Option<u32>, b: Option<u32>) -> Option<u32> {
 }
 
 
+// -- Conversion Functions -- // 
+
+/*
+    let vectored_number: Vec<_> = num.to_string()
+        .chars()
+        .map(|c| c.to_digit(10).unwrap())
+        .collect();
+
+*/
+
+// -- Conversion Functions -- // 
+
+
+
 // -- Squares of Series Functions -- //
 
 pub fn square_of_sum(n: u32) -> u32 {
@@ -108,3 +122,75 @@ pub fn is_chess_square(square: &u32) -> bool {
 // -- Chess Square Functions -- //
 
 
+
+
+
+// -- Luhn checksum -- Functions -- //
+
+/// Check a Luhn checksum.
+pub fn is_valid(code: &str) -> bool {
+    // params: code -- string slice representing the input identification number
+    // returns: is_valid_credit_number -- boolean that is true if the input is a valid identification number
+    let mut is_valid_credit_number: bool = true;
+
+    // -- stripping code input -- //
+    // Strings of length 1 or less are not valid.
+    // Spaces are allowed in the input, but they should be stripped before checking.
+    // All other non-digit characters are disallowed. -> no letters or other characters
+    // Converting code input into a vector of numbers
+
+    println!("code length: {}", code.len());
+
+    if code.len() <= 1 {
+        is_valid_credit_number = false;
+    }
+
+    let snipped_code = code.replace(" ", "");
+    let vectored_code: Vec<_> = snipped_code.chars().map(|c| c.to_digit(10).unwrap()).collect();
+    print!("vectored_code vec: {:?}\n", vectored_code);
+
+
+
+    // -- stripping code input -- //
+
+
+    
+    // -- checking code validity -- //
+    //  double every second digit, starting from the right.
+    // If doubling the number results in a number greater than 9 then subtract 9 from the product.
+    // Then sum all of the digits
+    // If the sum is evenly divisible by 10, then the number is valid
+    let mut digit_sum = 0;
+
+    for (i, mut digit) in (*vectored_code).iter().rev().enumerate() {
+        
+        if i%2 != 0 {
+            //println!("digit from end: {}", digit);
+            let double_digit = &(*digit * 2);
+            println!("digit from end: {}", double_digit);
+            if *double_digit >= 10 {
+                digit = &(*double_digit - 9);
+            } else {
+                digit = double_digit;
+            }
+        }
+        //digit_sum += (*digit as u32 % 10 + *digit /
+        //digit_sum += *digit;
+
+    }
+
+
+    if digit_sum%10 != 0 {
+        is_valid_credit_number = false;
+    }
+
+
+
+    // -- checking code validity -- //
+
+    is_valid_credit_number
+}
+
+
+
+// -- Luhn checksum -- Functions -- //

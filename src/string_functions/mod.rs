@@ -13,6 +13,14 @@ pub fn reverse(input: &str) -> String {
     reverse_input
 }
 
+// Eventually generalize this to also take String, not just string slice?
+// Might not be neccessary until I do this as it's just 1 line??
+pub fn vector_from_string_slice(string: &str) -> Vec<char> {
+    // params: string -- 
+    // returns: string_vector -- 
+    let string_vector: Vec<_> = string.chars().collect();
+    string_vector
+}
 
 
 // -- lifetime problems -- //
