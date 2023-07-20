@@ -141,14 +141,44 @@ pub fn is_valid(code: &str) -> bool {
 
     println!("code length: {}", code.len());
 
-    if code.len() <= 1 {
+    //if code.len() <= 1 {
+    //    is_valid_credit_number = false;
+    //}
+
+    let snipped_code = code.replace(" ", "");
+
+    if snipped_code.len() <= 1 {
         is_valid_credit_number = false;
     }
 
-    let snipped_code = code.replace(" ", "");
-    let vectored_code: Vec<_> = snipped_code.chars().map(|c| c.to_digit(10).unwrap()).collect();
-    print!("vectored_code vec: {:?}\n", vectored_code);
+    let is_snipped_code_numeric: Vec<bool> = snipped_code.chars().map(|c| c.is_numeric() ).collect();
 
+    // Does is_snipped_code_numeric contain any false bools for its values? If so, we have an invalid input, return false
+    if is_snipped_code_numeric.contains(&false) {
+        return false;
+    }
+
+
+    // replace the unrawp() command here with a match case Some(value) => {continue?} or None => {return false}
+    //let vectored_code: Vec<_> = match snipped_code {
+    //    Some(code) => code.chars().map(|c| c.to_digit(10).unwrap()).collect(),
+    //    None       => return false,
+    //};
+    
+    
+    //println!("vectored_code vec: {:?}\n", vectored_code);
+    //let vectored_code: Vec<_> = snipped_code.chars().map(|c| c.to_digit(10).unwrap()).collect();
+
+    let vectored_code: Vec<_> = snipped_code.chars().map(|c| 
+        match c.to_digit(10) {
+            Some(c) => c,
+            None => {
+                is_valid_credit_number = false;
+                0 as u32
+            },            
+        }
+    
+    ).collect();
 
 
     // -- stripping code input -- //
@@ -160,6 +190,10 @@ pub fn is_valid(code: &str) -> bool {
     // If doubling the number results in a number greater than 9 then subtract 9 from the product.
     // Then sum all of the digits
     // If the sum is evenly divisible by 10, then the number is valid
+
+
+
+
     let mut digit_sum = 0;
 
     for (i, mut digit) in (*vectored_code).iter().rev().enumerate() {
@@ -169,16 +203,20 @@ pub fn is_valid(code: &str) -> bool {
             let double_digit = &(*digit * 2);
             println!("digit from end: {}", double_digit);
             if *double_digit >= 10 {
-                digit = &(*double_digit - 9);
+                //digit = &(*double_digit - 9);
+                digit_sum = digit_sum + (*double_digit - 9);
             } else {
-                digit = double_digit;
+                //digit = double_digit;
+                digit_sum = digit_sum + *double_digit;
             }
+            
+        } else {
+            digit_sum = digit_sum + *digit;
         }
-        //digit_sum += (*digit as u32 % 10 + *digit /
-        //digit_sum += *digit;
 
     }
 
+    println!("digit_sum: {}", digit_sum);
 
     if digit_sum%10 != 0 {
         is_valid_credit_number = false;

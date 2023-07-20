@@ -19,9 +19,9 @@ fn main() {
     println!("validity of code_test {}: {}", code_test, validity);
 
 
-    let second_test = "1";
-    let valid_second = is_valid(&second_test);
-    println!("validity of second_test {}: {}", second_test, valid_second);
+    //let second_test = "1249①";
+    //let valid_second = is_valid(&second_test);
+    //println!("validity of second_test {}: {}", second_test, valid_second);
 
     /* 
     let num = 23;
