@@ -12,28 +12,22 @@ use math_functions::*;
 use general_functions::*;
 
 
+//use math_functions::Planet::{Mars, Venus};
+//crate::math_functions::{Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune};
+
 fn main() {
 
-    let code_test = "4539 3195 0343 6467";
-    let validity = is_valid(&code_test);
-    println!("validity of code_test {}: {}", code_test, validity);
+    let test_duration = Duration {
+        duration: 2_129_871_239
+    };
 
+    println!("test_duration: {}", test_duration.duration);
 
-    //let second_test = "1249①";
-    //let valid_second = is_valid(&second_test);
-    //println!("validity of second_test {}: {}", second_test, valid_second);
+    let test_planet = Mars;
+    //println!("testing: {}", Mars::years_during(&test_duration));
 
-    /* 
-    let num = 23;
-
-    let vectored_number: Vec<_> = num.to_string()
-        .chars()
-        .map(|c| c.to_digit(10).unwrap())
-        .collect();
-
-    println!("vectored_number: {:?}", vectored_number);
-    */
-
+    println!("years on test_planet: {}", test_planet.years_during(&test_duration));
+    //test_planet.years_during(&test_duration);
 
 }
 
